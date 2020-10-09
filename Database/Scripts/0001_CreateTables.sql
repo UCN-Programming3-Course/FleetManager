@@ -7,6 +7,6 @@ CREATE TABLE Cars(
 	Id int primary key not null identity(1,1),
 	Brand nvarchar(max) not null, 
 	Mileage int not null, 
-	Rented datetime null, 
+	Reserved datetime null, 
 	LocationId int null foreign key references Locations(Id)
 );
