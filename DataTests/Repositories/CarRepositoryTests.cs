@@ -1,10 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Data.Repositories;
-using System;
-using System.Collections.Generic;
+using Moq;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Data.Repositories.Tests
 {
@@ -39,6 +35,20 @@ namespace Data.Repositories.Tests
 
             Assert.IsNotNull(cars);
             Assert.IsTrue(cars.Count() == 2);
+        }
+
+        [TestMethod]
+        public void ShouldMarkCarAsReturned()
+        {
+            //CarRepository repos = new CarRepository();
+
+            CarRepository mock = Mock.Of<CarRepository>(r => r.MarkCarAsReturned(2) == true);
+
+            CarController ctrl = new(mock);
+
+            var test = ctrl.ReturnCar(2);
+
+            Assert.IsTrue(test);
         }
     }
 }

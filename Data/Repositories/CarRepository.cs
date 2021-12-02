@@ -36,13 +36,14 @@ namespace Data.Repositories
             }
         }
 
-        public void MarkCarAsReturned(int id)
+        public bool MarkCarAsReturned(int id)
         {
             using (var conn = new SqlConnection(_connectionString))
             {
                 string sql = "UPDATE Cars SET Reserved = null WHERE Id = @id";
 
-                conn.Execute(sql, new { id });
+                int rowsAffected = conn.Execute(sql, new { id });
+                return rowsAffected == 1;
             }
         }
 
